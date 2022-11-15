@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 const customYellow = Color(0xFFFBD42C);
 const customBlack = Color(0xFF000000);
+const customDarkNeutral5 = Color(0xFF787878);
 const customWhite = Color(0xFFFFFFFF);
 const customLight = Color(0xFFECEFF4);
+const customTransparent = Colors.transparent;
 
 List<ThemeData> getThemes() {
   return [
@@ -15,10 +17,11 @@ List<ThemeData> getThemes() {
         onSecondary: customWhite,
       ),
       textButtonTheme: TextButtonThemeData(
-        style: flatButtonStyle,
+        style: primaryButtonStyle,
       ),
       scaffoldBackgroundColor: customBlack,
     ),
+
     // Light theme
     ThemeData(
       fontFamily: 'Rajdhani',
@@ -31,9 +34,24 @@ List<ThemeData> getThemes() {
   ];
 }
 
-final ButtonStyle flatButtonStyle = TextButton.styleFrom(
+final ButtonStyle primaryButtonStyle = TextButton.styleFrom(
   backgroundColor: customYellow,
   foregroundColor: customBlack,
+  disabledBackgroundColor: customYellow.withOpacity(0.5),
+  disabledForegroundColor: customBlack,
+  minimumSize: const Size(56, 56),
+  shape: const ContinuousRectangleBorder(),
+  textStyle: const TextStyle(
+    fontFamily: 'Rajdhani',
+    color: customYellow,
+    fontSize: 18.0,
+    fontWeight: FontWeight.w600,
+  ),
+);
+
+final ButtonStyle secondaryButtonStyle = TextButton.styleFrom(
+  backgroundColor: customBlack,
+  foregroundColor: customWhite,
   minimumSize: const Size(56, 56),
   shape: const ContinuousRectangleBorder(),
   textStyle: const TextStyle(

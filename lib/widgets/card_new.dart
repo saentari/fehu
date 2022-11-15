@@ -1,3 +1,4 @@
+import 'package:fehu/ui/offer_creation/offer_creation_view.dart';
 import 'package:flutter/material.dart';
 
 class CardNew extends StatelessWidget {
@@ -17,7 +18,8 @@ class CardNew extends StatelessWidget {
           children: [
             Expanded(
               child: TextButton(
-                onPressed: () {},
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const OfferCreationView())),
                 child: const Text('Create'),
               ),
             ),
