@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../services/hive_manager.dart';
+
 class OfferCreationViewModel extends ChangeNotifier {
   var confirmed = false;
 
@@ -7,13 +9,11 @@ class OfferCreationViewModel extends ChangeNotifier {
   var quantityMin = 1;
   var description = '';
   var limitDescription = 'No limits set.';
+  var currency = 'msat';
+  var generatedDescription = '';
 
   num? amount;
   int? quantityMax;
-
-  String? unit;
-
-  late String generatedDescription;
 
   void initialise(BuildContext context) {
     generateDescription();
@@ -23,8 +23,8 @@ class OfferCreationViewModel extends ChangeNotifier {
     if (amount != null) {
       generatedDescription = '$amount';
     }
-    if (unit != null) {
-      generatedDescription = '$generatedDescription $unit';
+    if (currency != null) {
+      generatedDescription = '$generatedDescription $currency';
     }
     if (limitDescription != 'No limits set.') {
       generatedDescription =
@@ -38,7 +38,7 @@ class OfferCreationViewModel extends ChangeNotifier {
   Future<void> navigateAndDisplayAmount(BuildContext context) async {
     print('Changing some values.');
     amount = 1000;
-    unit = 'sats';
+    currency = 'sats';
 
     quantityMax = 50;
     if (quantityMax != null) {
@@ -66,8 +66,22 @@ class OfferCreationViewModel extends ChangeNotifier {
     return confirmed;
   }
 
-  void saveOffer(BuildContext context) {
+  Future<void> saveOffer(BuildContext context) async {
     print('Offer is being saved');
+
+    if (description.isEmpty) {
+      description = generatedDescription;
+    }
+
+    final hiveManager = HiveManager();
+    hiveManager.addToBox(
+      currency: currency,
+      description: description,
+      amount: amount.toString(),
+      quantityMin: quantityMin.toString(),
+      quantityMax: quantityMax.toString(),
+    );
+
     Navigator.pop(context);
   }
 }

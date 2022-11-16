@@ -70,7 +70,7 @@ class OfferCreationView extends StatelessWidget {
                     ),
                     Text(
                       model.amount != null
-                          ? '${model.amount} ${model.unit}'
+                          ? '${model.amount} ${model.currency}'
                           : 'Any amount',
                       style: const TextStyle(
                         fontSize: 20,

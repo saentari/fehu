@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../services/hive_manager.dart';
+
 class HomeViewModel extends ChangeNotifier {
-  PageController? pageController;
+  final hiveManager = HiveManager();
+
+  late PageController pageController;
 
   void initialise(BuildContext context) {
     var initialPage = ModalRoute.of(context)!.settings.arguments ?? 0;
