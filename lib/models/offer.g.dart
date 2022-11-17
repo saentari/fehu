@@ -19,7 +19,7 @@ class OfferAdapter extends TypeAdapter<Offer> {
     return Offer(
       fields[0] as String?,
       fields[1] as String?,
-      fields[2] as String?,
+      fields[2] as String,
       fields[3] as String?,
       fields[4] as String?,
       fields[5] as String?,
@@ -59,7 +59,7 @@ class OfferAdapter extends TypeAdapter<Offer> {
       ..writeByte(9)
       ..write(obj.recurrenceLimit)
       ..writeByte(10)
-      ..write(obj.recurrencePaywindow)
+      ..write(obj.recurrencePayWindow)
       ..writeByte(11)
       ..write(obj.nodeId)
       ..writeByte(12)

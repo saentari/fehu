@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 
 import '../ui/home/home_view.dart';
-import '../ui/theme_setup.dart';
+import '../ui/theme.dart';
 import 'models/offer.dart';
 
 Future<void> main() async {

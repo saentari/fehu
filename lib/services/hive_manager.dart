@@ -9,7 +9,7 @@ class HiveManager {
     return _box.length;
   }
 
-  Future<void> addToBox({
+  void addToBox({
     currency,
     amount,
     description,
@@ -20,11 +20,11 @@ class HiveManager {
     recurrence,
     recurrenceBase,
     recurrenceLimit,
-    recurrencePaywindow,
+    recurrencePayWindow,
     nodeId,
     sendInvoice,
     signature,
-  }) async {
+  }) {
     var offer = Offer(
       currency,
       amount,
@@ -36,22 +36,26 @@ class HiveManager {
       recurrence,
       recurrenceBase,
       recurrenceLimit,
-      recurrencePaywindow,
+      recurrencePayWindow,
       nodeId,
       sendInvoice,
       signature,
     );
 
-    await _box.add(offer);
+    _box.add(offer);
   }
 
-  Future<Offer> getFromBox(int index) async {
-    Offer offer = await _box.getAt(index);
+  void deleteFromBox(int index) {
+    _box.deleteAt(index);
+  }
+
+  Offer getFromBox(int index) {
+    Offer offer = _box.getAt(index);
 
     return offer;
   }
 
-  Future<void> putInBox(
+  void putInBox(
     int index, {
     currency,
     amount,
@@ -63,11 +67,11 @@ class HiveManager {
     recurrence,
     recurrenceBase,
     recurrenceLimit,
-    recurrencePaywindow,
+    recurrencePayWindow,
     nodeId,
     sendInvoice,
     signature,
-  }) async {
+  }) {
     var offer = Offer(
       currency,
       amount,
@@ -79,12 +83,12 @@ class HiveManager {
       recurrence,
       recurrenceBase,
       recurrenceLimit,
-      recurrencePaywindow,
+      recurrencePayWindow,
       nodeId,
       sendInvoice,
       signature,
     );
 
-    await _box.put(index, offer);
+    _box.put(index, offer);
   }
 }

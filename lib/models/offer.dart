@@ -14,7 +14,7 @@ class Offer {
 
   // Read-only `address` wallet or full `mnemonic` wallet type.
   @HiveField(2)
-  String? description;
+  String description;
 
   // Generates addresses and sets the network.
   @HiveField(3)
@@ -46,7 +46,7 @@ class Offer {
 
   // The preferred value denominator: default `BTC`.
   @HiveField(10)
-  String? recurrencePaywindow;
+  String? recurrencePayWindow;
 
   // The preferred value denominator: default `BTC`.
   @HiveField(11)
@@ -71,7 +71,7 @@ class Offer {
     this.recurrence,
     this.recurrenceBase,
     this.recurrenceLimit,
-    this.recurrencePaywindow,
+    this.recurrencePayWindow,
     this.nodeId,
     this.sendInvoice,
     this.signature,

@@ -3,7 +3,7 @@ import 'package:stacked/stacked.dart';
 
 import '../../widgets/safe_area.dart';
 import '../custom_icons.dart';
-import '../theme_setup.dart';
+import '../theme.dart';
 import 'offer_creation_view_model.dart';
 
 class OfferCreationView extends StatelessWidget {

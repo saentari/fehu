@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../services/hive_manager.dart';
+import '../home/home_view.dart';
 
 class OfferCreationViewModel extends ChangeNotifier {
   var confirmed = false;
@@ -82,6 +83,8 @@ class OfferCreationViewModel extends ChangeNotifier {
       quantityMax: quantityMax.toString(),
     );
 
-    Navigator.pop(context);
+    // Use pushReplacement to force a refresh.
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const HomeView()));
   }
 }

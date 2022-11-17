@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:page_view_indicators/circle_page_indicator.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../widgets/card_new.dart';
+import '../../widgets/offer_card.dart';
+import '../../widgets/offer_card_new.dart';
 import '../../widgets/safe_area.dart';
 import '../custom_icons.dart';
+import '../theme.dart';
 import 'home_view_model.dart';
 
 class HomeView extends StatelessWidget {
@@ -17,7 +20,13 @@ class HomeView extends StatelessWidget {
       builder: (context, model, child) => SafeAreaX(
         appBar: AppBar(
           centerTitle: true,
-          title: titleIcon,
+          title: GestureDetector(
+              onTap: () {
+                int lastItem = model.hiveManager.getBoxLength() - 1;
+                print(lastItem);
+                model.hiveManager.deleteFromBox(lastItem);
+              },
+              child: titleIcon),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           automaticallyImplyLeading: false,
         ),
@@ -26,16 +35,35 @@ class HomeView extends StatelessWidget {
             Expanded(
               child: PageView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 1,
+                itemCount: model.hiveManager.getBoxLength() + 1,
                 controller: model.pageController,
                 itemBuilder: (BuildContext context, int index) {
-                  return const CardNew();
+                  if (index == model.hiveManager.getBoxLength()) {
+                    return const OfferCardNew();
+                  } else {
+                    final offer = model.hiveManager.getFromBox(index);
+                    return OfferCard(offer);
+                  }
+                },
+                onPageChanged: (int index) {
+                  model.currentPageNotifier.value = index;
                 },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Container(height: 8.0),
+              child: model.hiveManager.getBoxLength() > 0
+                  ? Center(
+                      child: CirclePageIndicator(
+                        size: 8.0,
+                        selectedSize: 8.0,
+                        dotColor: customWhite,
+                        selectedDotColor: customYellow,
+                        itemCount: model.hiveManager.getBoxLength() + 1,
+                        currentPageNotifier: model.currentPageNotifier,
+                      ),
+                    )
+                  : const SizedBox(height: 8.0),
             ),
           ],
         ),

@@ -4,12 +4,14 @@ import '../../services/hive_manager.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final hiveManager = HiveManager();
+  final currentPageNotifier = ValueNotifier<int>(0);
 
   late PageController pageController;
 
   void initialise(BuildContext context) {
     var initialPage = ModalRoute.of(context)!.settings.arguments ?? 0;
     pageController = PageController(initialPage: initialPage as int);
+    currentPageNotifier.value = initialPage;
     notifyListeners();
   }
 }

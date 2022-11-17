@@ -18,6 +18,7 @@ dependencies:
   # UI components
   cupertino_icons: ^1.0.2
   flutter_svg: ^1.1.6
+  page_view_indicators: ^2.0.0
   stacked_themes: ^0.3.9
 
   # Storage & State management
@@ -28,6 +29,7 @@ dependencies:
   # Utility
   http: ^0.13.5
   intl: ^0.17.0
+
 
 
 dev_dependencies:
