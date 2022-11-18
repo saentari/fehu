@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 const customYellow = Color(0xFFFBD42C);
 const customBlack = Color(0xFF000000);
+const customDarkNeutral1 = Color(0xFF1A1A1A);
+const customDarkNeutral4 = Color(0xFF5C5C5C);
 const customDarkNeutral5 = Color(0xFF787878);
+
 const customWhite = Color(0xFFFFFFFF);
 const customLight = Color(0xFFECEFF4);
 const customTransparent = Colors.transparent;

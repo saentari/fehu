@@ -202,6 +202,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_emoji:
+    dependency: "direct main"
+    description:
+      name: flutter_emoji
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.4.0"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -541,6 +548,22 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.1"
+  qr:
+    dependency: transitive
+    description:
+      name: qr
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
+  qr_flutter:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "1fc6e38c198a76a6fd60b7bd3b4c190cd6c9330b"
+      url: "git://github.com/lukef/qr.flutter.git"
+    source: git
+    version: "4.0.1"
   rxdart:
     dependency: transitive
     description:

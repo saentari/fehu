@@ -17,8 +17,13 @@ dependencies:
 
   # UI components
   cupertino_icons: ^1.0.2
+  flutter_emoji: ^2.4.0
   flutter_svg: ^1.1.6
   page_view_indicators: ^2.0.0
+  qr_flutter:
+    # qr_flutter 4.0.0 contains outdated package:qr/qr.dart with error.
+    git:
+      url: git://github.com/lukef/qr.flutter.git
   stacked_themes: ^0.3.9
 
   # Storage & State management
@@ -29,8 +34,6 @@ dependencies:
   # Utility
   http: ^0.13.5
   intl: ^0.17.0
-
-
 
 dev_dependencies:
   flutter_test:
