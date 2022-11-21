@@ -4,65 +4,77 @@ part 'offer.g.dart';
 
 @HiveType(typeId: 0)
 class Offer {
-  // The uniquely generated id for the [Wallet].
+  // The file path where the background image is stored.
   @HiveField(0)
-  String? currency;
+  String? imagePath;
 
-  // Customizable name given to the [Wallet].
+  // All fiat or bitcoin units are converted to msat amounts.
   @HiveField(1)
-  String? amount;
+  String? amountMsat;
 
-  // Read-only `address` wallet or full `mnemonic` wallet type.
+  // Custom description of bolt12 offer.
   @HiveField(2)
   String description;
 
-  // Generates addresses and sets the network.
+  // The absoluteExpiry.
   @HiveField(3)
   String? absoluteExpiry;
 
-  // Stores [Address] data such as transactions and balances.
+  // The vendor name/domain.
   @HiveField(4)
   String? vendor;
 
-  // The unique id for the background image.
+  // The lower [amountMsat] limit.
   @HiveField(5)
   String? quantityMin;
 
-  // The file path where the background image is stored.
+  // The upper [amountMsat] limit.
   @HiveField(6)
   String? quantityMax;
 
-  // The preferred fiat currency: default `USD`.
+  // Describes how often it reoccurs (e.g. 1minute).
   @HiveField(7)
   String? recurrence;
 
-  // The preferred value denominator: default `BTC`.
+  // Starting moment
   @HiveField(8)
   String? recurrenceBase;
 
-  // The preferred value denominator: default `BTC`.
+  // Maximum recurrence limit (e.g. 3 times).
   @HiveField(9)
   String? recurrenceLimit;
 
-  // The preferred value denominator: default `BTC`.
+  // The payment window before or after the [recurrenceBase].
   @HiveField(10)
   String? recurrencePayWindow;
 
-  // The preferred value denominator: default `BTC`.
+  // The lightning node id.
   @HiveField(11)
   String? nodeId;
 
-  // The preferred value denominator: default `BTC`.
+  // The sendInvoice.
   @HiveField(12)
   String? sendInvoice;
 
-  // The preferred value denominator: default `BTC`.
+  // The signature.
   @HiveField(13)
   String? signature;
 
+  // Bolt12 type: default `bolt12 offer`.
+  @HiveField(14)
+  String? type;
+
+  // Signed bolt12 string.
+  @HiveField(15)
+  String? bolt12;
+
+  // Unsigned bolt12 string.
+  @HiveField(16)
+  String? bolt12Unsigned;
+
   Offer(
-    this.currency,
-    this.amount,
+    this.imagePath,
+    this.amountMsat,
     this.description,
     this.absoluteExpiry,
     this.vendor,
@@ -75,5 +87,7 @@ class Offer {
     this.nodeId,
     this.sendInvoice,
     this.signature,
+    this.bolt12,
+    this.bolt12Unsigned,
   );
 }

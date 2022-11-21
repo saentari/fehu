@@ -31,17 +31,19 @@ class OfferAdapter extends TypeAdapter<Offer> {
       fields[11] as String?,
       fields[12] as String?,
       fields[13] as String?,
-    );
+      fields[15] as String?,
+      fields[16] as String?,
+    )..type = fields[14] as String?;
   }
 
   @override
   void write(BinaryWriter writer, Offer obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(17)
       ..writeByte(0)
-      ..write(obj.currency)
+      ..write(obj.imagePath)
       ..writeByte(1)
-      ..write(obj.amount)
+      ..write(obj.amountMsat)
       ..writeByte(2)
       ..write(obj.description)
       ..writeByte(3)
@@ -65,7 +67,13 @@ class OfferAdapter extends TypeAdapter<Offer> {
       ..writeByte(12)
       ..write(obj.sendInvoice)
       ..writeByte(13)
-      ..write(obj.signature);
+      ..write(obj.signature)
+      ..writeByte(14)
+      ..write(obj.type)
+      ..writeByte(15)
+      ..write(obj.bolt12)
+      ..writeByte(16)
+      ..write(obj.bolt12Unsigned);
   }
 
   @override

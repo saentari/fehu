@@ -1,6 +1,13 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as path_provider;
+
+import '../../models/unsplash_image.dart';
 import '../../services/hive_manager.dart';
+import '../../services/unsplash_image_provider.dart';
 import '../home/home_view.dart';
 
 class OfferCreationViewModel extends ChangeNotifier {
@@ -74,11 +81,21 @@ class OfferCreationViewModel extends ChangeNotifier {
       description = generatedDescription;
     }
 
+    // Retrieve a random `nature` background image.
+    var localPath = '';
+    try {
+      UnsplashImage imageData = await _loadRandomImage(keyword: 'chocolate');
+      localPath = await _downloadFile(imageData.getRegularUrl());
+    } catch (e) {
+      // If it fails, use the default image.
+      localPath = 'assets/images/joanna-kosinska-4dnG4q3kxdg-unsplash.jpeg';
+    }
+
     final hiveManager = HiveManager();
     hiveManager.addToBox(
-      currency: currency,
+      imagePath: localPath,
       description: description,
-      amount: amount.toString(),
+      amountMsat: amount.toString(),
       quantityMin: quantityMin.toString(),
       quantityMax: quantityMax.toString(),
     );
@@ -86,5 +103,33 @@ class OfferCreationViewModel extends ChangeNotifier {
     // Use pushReplacement to force a refresh.
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => const HomeView()));
+  }
+
+  // Requests a [UnsplashImage] for a given [keyword] query.
+  //
+  // If the given [keyword] is null, any random image is loaded.
+  Future<UnsplashImage> _loadRandomImage({String? keyword}) async {
+    var imageData =
+        await UnsplashImageProvider.loadRandomImage(keyword: keyword);
+    return imageData;
+  }
+
+  Future<String> _downloadFile(String url) async {
+    // Default background image.
+    var localPath = 'assets/images/geran-de-klerk-qzgN45hseN0-unsplash.jpeg';
+    var response = await http.get(Uri.parse(url));
+
+    // Get the image name.
+    var imageName = path.basename(url);
+
+    // Get the document directory path.
+    var appDir = await path_provider.getApplicationDocumentsDirectory();
+    // This is the saved image path.
+    localPath = path.join(appDir.path, imageName);
+
+    // Download locally.
+    var imageFile = File(localPath);
+    await imageFile.writeAsBytes(response.bodyBytes);
+    return localPath;
   }
 }

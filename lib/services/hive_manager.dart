@@ -10,8 +10,8 @@ class HiveManager {
   }
 
   void addToBox({
-    currency,
-    amount,
+    imagePath,
+    amountMsat,
     description,
     absoluteExpiry,
     vendor,
@@ -24,10 +24,12 @@ class HiveManager {
     nodeId,
     sendInvoice,
     signature,
+    bolt12,
+    bolt12Unsigned,
   }) {
     var offer = Offer(
-      currency,
-      amount,
+      imagePath,
+      amountMsat,
       description,
       absoluteExpiry,
       vendor,
@@ -40,6 +42,8 @@ class HiveManager {
       nodeId,
       sendInvoice,
       signature,
+      bolt12,
+      bolt12Unsigned,
     );
 
     _box.add(offer);
@@ -57,8 +61,8 @@ class HiveManager {
 
   void putInBox(
     int index, {
-    currency,
-    amount,
+    imagePath,
+    amountMsat,
     description,
     absoluteExpiry,
     vendor,
@@ -71,10 +75,12 @@ class HiveManager {
     nodeId,
     sendInvoice,
     signature,
+    bolt12,
+    bolt12Unsigned,
   }) {
     var offer = Offer(
-      currency,
-      amount,
+      imagePath,
+      amountMsat,
       description,
       absoluteExpiry,
       vendor,
@@ -87,6 +93,8 @@ class HiveManager {
       nodeId,
       sendInvoice,
       signature,
+      bolt12,
+      bolt12Unsigned,
     );
 
     _box.put(index, offer);

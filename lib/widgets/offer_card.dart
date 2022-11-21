@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../models/offer.dart';
@@ -15,10 +17,7 @@ class OfferCard extends StatelessWidget {
         Positioned.fill(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16.0),
-            child: Image.asset(
-              'assets/images/joanna-kosinska-4dnG4q3kxdg-unsplash.jpeg',
-              fit: BoxFit.cover,
-            ),
+            child: showImage(),
           ),
         ),
         Positioned(
@@ -41,5 +40,21 @@ class OfferCard extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  // Loads the stored image or reverts back to the default image.
+  showImage() {
+    if (FileSystemEntity.typeSync(offer.imagePath!) ==
+        FileSystemEntityType.notFound) {
+      return Image.asset(
+        'assets/images/geran-de-klerk-qzgN45hseN0-unsplash.jpeg',
+        fit: BoxFit.cover,
+      );
+    } else {
+      return Image.file(
+        File(offer.imagePath!),
+        fit: BoxFit.cover,
+      );
+    }
   }
 }
