@@ -31,11 +31,25 @@ class OfferCreationView extends StatelessWidget {
                         onPressed: () => model.confirmed == true
                             ? model.saveOffer(context)
                             : null,
+                        style: TextButton.styleFrom(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(16.0),
+                            ),
+                          ),
+                        ),
                         child: const Text('Create'),
                       )
-                    : const TextButton(
+                    : TextButton(
                         onPressed: null,
-                        child: Text('Create'),
+                        style: TextButton.styleFrom(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(16.0),
+                            ),
+                          ),
+                        ),
+                        child: const Text('Create'),
                       ),
               ),
               Expanded(
@@ -69,7 +83,7 @@ class OfferCreationView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      model.amount != null
+                      model.amount > 0
                           ? '${model.amount} ${model.currency}'
                           : 'Any amount',
                       style: const TextStyle(
@@ -82,7 +96,7 @@ class OfferCreationView extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () => model.navigateAndDisplayAmount(context),
+              onTap: () => model.dummyData(context),
               child: Container(
                 width: double.infinity,
                 color: customTransparent,
@@ -110,7 +124,7 @@ class OfferCreationView extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () => model.navigateAndDisplayAmount(context),
+              onTap: () => model.dummyData(context),
               child: Container(
                 width: double.infinity,
                 color: customTransparent,

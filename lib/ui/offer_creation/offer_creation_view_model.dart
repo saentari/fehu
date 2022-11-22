@@ -9,6 +9,7 @@ import '../../models/unsplash_image.dart';
 import '../../services/hive_manager.dart';
 import '../../services/unsplash_image_provider.dart';
 import '../home/home_view.dart';
+import '../offer_amount/offer_amount_view.dart';
 
 class OfferCreationViewModel extends ChangeNotifier {
   var confirmed = false;
@@ -17,39 +18,49 @@ class OfferCreationViewModel extends ChangeNotifier {
   var quantityMin = 1;
   var description = '';
   var limitDescription = 'No limits set.';
-  var currency = 'msat';
+  var currency = 'sat';
   var generatedDescription = '';
-
-  num? amount;
-  int? quantityMax;
+  var amount = 0;
+  var quantityMax = 0;
 
   void initialise(BuildContext context) {
     generateDescription();
+    confirmed = validatingInputs();
+    notifyListeners();
   }
 
   void generateDescription() {
-    if (amount != null) {
-      generatedDescription = '$amount';
-    }
-    if (currency != null) {
-      generatedDescription = '$generatedDescription $currency';
+    if (amount > 0) {
+      generatedDescription = '$amount $currency';
     }
     if (limitDescription != 'No limits set.') {
       generatedDescription =
           '$generatedDescription, $limitDescription'.toLowerCase();
-    } else {
+    }
+    if (amount == 0) {
       generatedDescription = 'Generic offer.';
     }
     notifyListeners();
   }
 
   Future<void> navigateAndDisplayAmount(BuildContext context) async {
-    print('Changing some values.');
-    amount = 1000;
-    currency = 'sats';
+    var price = await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => OfferAmountView(amount, currency)),
+    );
+    amount = price[0];
+    currency = price[1];
+    confirmed = validatingInputs();
+    generateDescription();
+  }
 
+  Future<void> dummyData(BuildContext context) async {
+    amount = 1000;
+    currency = 'sat';
     quantityMax = 50;
-    if (quantityMax != null) {
+
+    if (quantityMax > 0) {
       limitDescription = 'Up to $quantityMax times.';
     } else {
       limitDescription = 'No limits set.';
@@ -66,8 +77,9 @@ class OfferCreationViewModel extends ChangeNotifier {
   // Validation of BOLT12 spec.
   bool validatingInputs() {
     confirmed = true;
-    if (amount != null) {
-      assert(amount! > 0);
+    // When amount equals zero, then any amount.
+    if (amount >= 0) {
+      confirmed = true;
     } else {
       confirmed = false;
     }
@@ -75,13 +87,11 @@ class OfferCreationViewModel extends ChangeNotifier {
   }
 
   Future<void> saveOffer(BuildContext context) async {
-    print('Offer is being saved');
-
     if (description.isEmpty) {
       description = generatedDescription;
     }
 
-    // Retrieve a random `nature` background image.
+    // Retrieve a random `chocolate` background image.
     var localPath = '';
     try {
       UnsplashImage imageData = await _loadRandomImage(keyword: 'chocolate');

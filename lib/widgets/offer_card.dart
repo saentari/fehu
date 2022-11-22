@@ -47,7 +47,7 @@ class OfferCard extends StatelessWidget {
     if (FileSystemEntity.typeSync(offer.imagePath!) ==
         FileSystemEntityType.notFound) {
       return Image.asset(
-        'assets/images/geran-de-klerk-qzgN45hseN0-unsplash.jpeg',
+        'assets/images/joanna-kosinska-4dnG4q3kxdg-unsplash.jpeg',
         fit: BoxFit.cover,
       );
     } else {

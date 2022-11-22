@@ -27,7 +27,7 @@ class QrView extends StatelessWidget {
           automaticallyImplyLeading: false,
         ),
         bottomBar: Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: const EdgeInsets.only(bottom: 24.0),
           child: TextButton(
             onPressed: () => Navigator.pop(context),
             style: TextButton.styleFrom(
@@ -88,6 +88,16 @@ class QrView extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            const Text(
+              'Show details',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: customYellow,
+                decoration: TextDecoration.underline,
               ),
             ),
           ],

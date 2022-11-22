@@ -1,9 +1,9 @@
+import 'package:fehu/ui/loading/loading_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 
-import '../ui/home/home_view.dart';
 import '../ui/theme.dart';
 import 'models/offer.dart';
 
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           darkTheme: darkTheme,
           themeMode: themeMode,
           debugShowCheckedModeBanner: false,
-          home: const HomeView(),
+          home: const LoadingView(),
         );
       },
     );
