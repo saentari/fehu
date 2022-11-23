@@ -1,3 +1,4 @@
+import 'package:fehu/ui/home/home_view.dart';
 import 'package:fehu/ui/loading/loading_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
           themeMode: themeMode,
           debugShowCheckedModeBanner: false,
           home: const LoadingView(),
+          routes: {
+            HomeView.routeName: (context) => const HomeView(),
+          },
         );
       },
     );

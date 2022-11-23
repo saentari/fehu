@@ -12,6 +12,8 @@ import 'home_view_model.dart';
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
+  static const routeName = '/home_screen';
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
@@ -22,10 +24,8 @@ class HomeView extends StatelessWidget {
             appBar: AppBar(
               centerTitle: true,
               title: GestureDetector(
-                  onTap: () {
-                    int offerIndex = model.currentPageNotifier.value;
-                    model.hiveManager.deleteFromBox(offerIndex);
-                  },
+                  onTap: () =>
+                      model.deleteOffer(model.currentPageNotifier.value),
                   child: titleIcon),
               backgroundColor: customBlack,
               automaticallyImplyLeading: false,
@@ -47,6 +47,7 @@ class HomeView extends StatelessWidget {
                       }
                     },
                     onPageChanged: (int index) {
+                      print(index);
                       model.currentPageNotifier.value = index;
                       model.updateOffer(index);
                     },

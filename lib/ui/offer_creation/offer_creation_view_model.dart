@@ -8,7 +8,6 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 import '../../models/unsplash_image.dart';
 import '../../services/hive_manager.dart';
 import '../../services/unsplash_image_provider.dart';
-import '../home/home_view.dart';
 import '../offer_amount/offer_amount_view.dart';
 
 class OfferCreationViewModel extends ChangeNotifier {
@@ -111,8 +110,9 @@ class OfferCreationViewModel extends ChangeNotifier {
     );
 
     // Use pushReplacement to force a refresh.
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const HomeView()));
+    int jumpToPage = HiveManager().getBoxLength() - 1;
+    Navigator.pushReplacementNamed(context, '/home_screen',
+        arguments: jumpToPage);
   }
 
   // Requests a [UnsplashImage] for a given [keyword] query.

@@ -28,6 +28,13 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteOffer(int index) {
+    if (index < hiveManager.getBoxLength()) {
+      hiveManager.deleteFromBox(index);
+      notifyListeners();
+    }
+  }
+
   List<Widget> showActions(BuildContext context) {
     if (offer != null) {
       return [
